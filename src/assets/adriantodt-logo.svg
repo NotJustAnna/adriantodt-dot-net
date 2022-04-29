@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="3000">
+<g transform="translate(25,600)">
+<polygon points="1250,0 2700,0 2950,600 1000,600" style="fill:#f60"/>
+<polygon points="1950,600 2450,1800 2950,1800 2450,600" style="fill:#d50a00"/>
+<polygon points="1250,0 2000,1800 1500,1800 750,0" style="fill:#f80"/>
+<polygon points="0,1800 750,0 1250,0 500,1800" style="fill:#fc0"/>
+</g>
+</svg>
