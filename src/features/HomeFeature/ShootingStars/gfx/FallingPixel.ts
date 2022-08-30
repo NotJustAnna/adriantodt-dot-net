@@ -7,11 +7,12 @@ export class FallingPixel extends FallingDot {
     size: number,
     readonly target: { x: number, y: number },
     readonly image: FallingImage,
+    speed?: number,
   ) {
-    super(color, size, size);
+    super(color, size, speed ?? Math.floor(Math.random() * 5 + 5));
   }
 
-  lifetime = Math.floor(Math.random() * 70 + 10);
+  lifetime = Math.floor(Math.random() * 10 + 80);
 
   render(ctx: CanvasRenderingContext2D, delta: number) {
     if (!this.ready) {

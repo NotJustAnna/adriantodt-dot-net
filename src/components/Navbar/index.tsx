@@ -8,7 +8,7 @@ const Logo = styled('img')({
   maxWidth: 40,
 });
 
-export default function AppNavbar() {
+export default function Navbar() {
   return <AppBar position="fixed">
     <Container maxWidth="xl">
       <Toolbar disableGutters>

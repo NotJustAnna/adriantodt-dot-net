@@ -22,7 +22,7 @@ export class FallingDotImageGenerator {
 
     for (let i = 0; i < size * 2; i++) {
       ctx.fillStyle = color;
-      const at = max - speed * i, sz = speed - Math.floor(i / 2);
+      const at = max - speed * i, sz = size - Math.floor(i / 1.5);
       if (sz <= 0) {
         break;
       }
@@ -50,9 +50,9 @@ export class FallingDotImageGenerator {
 
   private static darkerShade(color: string) {
     const rgb = color.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i)!;
-    const r = Math.floor(parseInt(rgb[1], 16) * 0.7);
-    const g = Math.floor(parseInt(rgb[2], 16) * 0.7);
-    const b = Math.floor(parseInt(rgb[3], 16) * 0.7);
+    const r = Math.floor(parseInt(rgb[1], 16) * 0.75);
+    const g = Math.floor(parseInt(rgb[2], 16) * 0.75);
+    const b = Math.floor(parseInt(rgb[3], 16) * 0.75);
     return '#' + [r, g, b].map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
   }
 }

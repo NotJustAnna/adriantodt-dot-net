@@ -39,6 +39,7 @@ export class FallingImage {
 
   pixelFinished(color: string, x: number, y: number) {
     this.imageCtx.fillStyle = color;
+    this.imageCtx.imageSmoothingEnabled = false;
     this.imageCtx.fillRect(x, y, 1, 1);
   }
 
@@ -70,7 +71,7 @@ export class FallingImage {
         if (a === 0 || (r === 0 && g === 0 && b === 0)) {
           continue;
         }
-        if ((i % 1024) == 0 && i > 0) {
+        if ((i % 1024) === 0 && i > 0) {
           await new Promise(resolve => setTimeout(resolve, 0));
         }
         image.queuePixel('#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join(''), (i / 4) % w, Math.floor((i / 4) / w));

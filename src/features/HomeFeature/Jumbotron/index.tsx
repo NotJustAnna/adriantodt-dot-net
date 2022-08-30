@@ -5,7 +5,7 @@ import JumbotronGreeting from './JumbotronGreeting';
 import JumbotronIcons from './JumbotronIcons';
 
 export default function Index() {
-  return <Box sx={{ py: 4, bgcolor: '#943900' }}>
+  return <Box sx={{ py: 4, bgcolor: '#a13e00' }}>
     <Container maxWidth="md">
       <Box sx={{ mt: 3 }}>
         <JumbotronGreeting/>

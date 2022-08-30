@@ -11,17 +11,18 @@ export class ShootingStarsRenderer {
     }
 
     draw(ctx: CanvasRenderingContext2D, delta: number) {
+        ctx.imageSmoothingEnabled = false;
         ctx.canvas.width = ctx.canvas.clientWidth;
         ctx.canvas.height = ctx.canvas.clientHeight;
-        this.bufferCanvas.width = ctx.canvas.width;
-        this.bufferCanvas.height = ctx.canvas.height;
+        //this.bufferCanvas.width = ctx.canvas.width;
+        //this.bufferCanvas.height = ctx.canvas.height;
 
-        const bufferCtx = this.bufferCtx;
-        bufferCtx.clearRect(0, 0, this.bufferCanvas.width, this.bufferCanvas.height);
-
-        this.objs = this.objs.filter(r => r.render(bufferCtx, delta));
-
+        //const bufferCtx = this.bufferCtx;
+        //bufferCtx.clearRect(0, 0, this.bufferCanvas.width, this.bufferCanvas.height);
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        ctx.drawImage(this.bufferCanvas, 0, 0);
+
+        this.objs = this.objs.filter(r => r.render(ctx, delta));
+
+        //ctx.drawImage(this.bufferCanvas, 0, 0);
     }
 }

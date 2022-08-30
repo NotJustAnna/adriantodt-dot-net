@@ -4,12 +4,12 @@ import { useState } from 'react';
 
 export interface TerminalProps {
   open: boolean;
-  handleClose: () => void;
+  handleClose: (text?: string) => void;
   enableShootingStars: () => void;
 }
 
 const autoComplete = [
-  'shootingstars'
+  'shootingstars',
 ];
 
 export default function Terminal(props: TerminalProps) {
@@ -19,9 +19,15 @@ export default function Terminal(props: TerminalProps) {
   };
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      props.handleClose();
+      event.preventDefault();
+      if (text.length === 0) {
+        return;
+      }
       if (text === 'shootingstars') {
         props.enableShootingStars();
+        props.handleClose();
+      } else {
+        props.handleClose(`${text.split(' ')[0]}: command not found`);
       }
       setText('');
     } else if (event.key === 'Tab') {
@@ -42,7 +48,7 @@ export default function Terminal(props: TerminalProps) {
   };
   return <Modal
     open={props.open}
-    onClose={props.handleClose}
+    onClose={() => props.handleClose()}
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"
   >

@@ -4,13 +4,14 @@ import Canvas from './Canvas';
 import { useContext, useEffect, useRef } from 'react';
 import { ShootingStarsScene } from './gfx/ShootingStarsScene';
 import { HomeContext } from '../context';
+import adriantodtPixelated from '../../../assets/adriantodt.pixelated.png';
 
 export default function ShootingStars() {
   const { disableShootingStars } = useContext(HomeContext);
 
   const sceneRef = useRef<ShootingStarsScene>();
   if (!sceneRef.current) {
-    sceneRef.current = new ShootingStarsScene('/adriantodt.pixelated.png');
+    sceneRef.current = new ShootingStarsScene(adriantodtPixelated);
   }
 
   useEffect(() => {
