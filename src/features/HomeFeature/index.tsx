@@ -13,7 +13,7 @@ import ShootingStars from './ShootingStars';
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 function DefaultContent() {
-  return <Container maxWidth="xl">
+  return <Container maxWidth="lg">
     <Box sx={{ my: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>
         Create React App example with TypeScript
@@ -37,6 +37,6 @@ export default function HomeFeature() {
     <Offset/>
     {shootingStars ? <ShootingStars/> : <Jumbotron/>}
     <DefaultContent/>
-    <Terminal open={open} handleClose={handleClose} enableShootingStars={enableShootingStars} />
+    <Terminal open={open} handleClose={handleClose} enableShootingStars={enableShootingStars}/>
   </HomeContext.Provider>;
 }

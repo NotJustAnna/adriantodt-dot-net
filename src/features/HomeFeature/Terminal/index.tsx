@@ -58,7 +58,7 @@ export default function Terminal(props: TerminalProps) {
       // p: 4,
     }}>
       <TextField
-        label="Terminal"
+        label="guest@adriantodt.net"
         fullWidth
         sx={{ bgcolor: 'background.paper' }}
         InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
