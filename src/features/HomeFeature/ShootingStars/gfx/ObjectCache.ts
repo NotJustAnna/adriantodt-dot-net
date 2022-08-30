@@ -46,6 +46,6 @@ export class ObjectCache<T> {
       if (this.cache.size === 0) {
         clearInterval(this.cleanupInterval);
       }
-    }, 1000);
+    }, this.ttl);
   }
 }

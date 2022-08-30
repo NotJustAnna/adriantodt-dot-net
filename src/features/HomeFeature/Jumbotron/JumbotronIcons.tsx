@@ -9,7 +9,9 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 import { faGitlab } from '@fortawesome/free-brands-svg-icons/faGitlab';
 import { faSteam } from '@fortawesome/free-brands-svg-icons/faSteam';
 import { faDocker } from '@fortawesome/free-brands-svg-icons/faDocker';
+import { faTerminal } from '@fortawesome/free-solid-svg-icons/faTerminal';
 import React from 'react';
+import { HomeContext } from '../context';
 
 export default function JumbotronIcons() {
   return <>
@@ -37,5 +39,10 @@ export default function JumbotronIcons() {
     <IconButton aria-label="Dockerhub" href="https://twitter.com/adriantodt">
       <FontAwesomeIcon icon={faDocker} mask={faCircle} transform="shrink-6"/>
     </IconButton>
+    <HomeContext.Consumer>
+      {({ openTerminal }) => <IconButton aria-label="Terminal" onClick={openTerminal}>
+        <FontAwesomeIcon icon={faTerminal} mask={faCircle} transform="shrink-7"/>
+      </IconButton>}
+    </HomeContext.Consumer>
   </>;
 }

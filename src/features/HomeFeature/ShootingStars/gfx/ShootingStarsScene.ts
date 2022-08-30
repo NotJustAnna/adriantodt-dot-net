@@ -1,12 +1,17 @@
 import { ShootingStarsRenderer } from './ShootingStarsRenderer';
 import { ShootingStar } from './ShootingStar';
-import { FallingDot } from './FallingDot';
+import { FallingImage } from './FallingImage';
 
 export class ShootingStarsScene {
   private readonly renderer = new ShootingStarsRenderer();
   private lastRenderTime: number = 0;
   private deltaAcc: number = 0;
-  private queuedObjs: FallingDot[] = [];
+  private image?: FallingImage;
+  imageUrl?: string;
+
+  constructor(imageUrl?: string) {
+    this.imageUrl = imageUrl;
+  }
 
   loop(ctx: CanvasRenderingContext2D) {
     const now = performance ? performance.now() : Date.now();
@@ -18,10 +23,20 @@ export class ShootingStarsScene {
       this.deltaAcc -= 5;
       this.renderer.objs.push(ShootingStar.ofColor(ShootingStarsScene.randomColor()));
     }
-    if (this.queuedObjs.length > 0) {
-      this.renderer.objs.push(this.queuedObjs.shift()!);
+    if (this.image) {
+      if (this.image.queuedPixels.length > 0) {
+        this.renderer.objs.push(this.image.queuedPixels.shift()!);
+      }
+    } else if (this.imageUrl) {
+      FallingImage.fromImageUrl(this.imageUrl, ctx.canvas.width, ctx.canvas.height).then(image => {
+        this.image = image;
+      });
+      this.imageUrl = undefined;
     }
     this.renderer.draw(ctx, delta);
+    if (this.image) {
+      this.image.draw(ctx);
+    }
   }
 
   private static randomColor() {

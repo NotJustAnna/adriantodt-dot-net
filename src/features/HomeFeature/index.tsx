@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Jumbotron from './Jumbotron';
 import Copyright from '../../components/Copyright';
+import { HomeContext } from './context';
+import Terminal from './Terminal';
 import ShootingStars from './ShootingStars';
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
@@ -22,10 +24,19 @@ function DefaultContent() {
 }
 
 export default function HomeFeature() {
-  return <>
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [shootingStars, setShootingStars] = React.useState(false);
+  const enableShootingStars = () => setShootingStars(true);
+  const disableShootingStars = () => setShootingStars(false);
+
+  return <HomeContext.Provider value={{ openTerminal: handleOpen, disableShootingStars }}>
     <Navbar/>
     <Offset/>
-    <ShootingStars/>
+    {shootingStars ? <ShootingStars/> : <Jumbotron/>}
     <DefaultContent/>
-  </>;
+    <Terminal open={open} handleClose={handleClose} enableShootingStars={enableShootingStars} />
+  </HomeContext.Provider>;
 }
