@@ -5,7 +5,7 @@ import TextTransition, { presets } from 'react-text-transition';
 const things = ['back-end', 'applications', 'AWS', 'Serverless', 'projects'];
 
 function Over(props: { toggled: boolean }) {
-  return <TextTransition inline text={props.toggled ? 'over-' : ''} springConfig={presets.wobbly}/>;
+  return <TextTransition inline springConfig={presets.wobbly}>{props.toggled ? 'over-' : ''}</TextTransition>;
 }
 
 function Things() {
@@ -16,7 +16,7 @@ function Things() {
     return () => clearTimeout(id);
   }, []);
 
-  return <TextTransition inline text={things[index % things.length]} springConfig={presets.gentle}/>;
+  return <TextTransition inline springConfig={presets.gentle}>{things[index % things.length]}</TextTransition>;
 }
 
 export default function JumbotronGreeting() {
