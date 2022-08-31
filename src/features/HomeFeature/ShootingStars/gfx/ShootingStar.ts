@@ -1,6 +1,8 @@
 import { FallingDot } from './FallingDot';
 
 export class ShootingStar extends FallingDot {
+  private r = (Math.random() - 0.25) * 1.25;
+
   constructor(
     color: string,
     size: number,
@@ -19,7 +21,8 @@ export class ShootingStar extends FallingDot {
     const canvas = ctx.canvas,
       h = canvas.height,
       w = canvas.width,
-      e = Math.floor(this.entropy * ((h + w) / 765)),
+      hw = h + w,
+      e = Math.floor(hw * this.r),
       n = this.lifetime * this.speed;
 
     let spawnX, spawnY;

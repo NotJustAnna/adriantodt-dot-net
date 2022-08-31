@@ -1,9 +1,21 @@
 import { FallingPixel } from './FallingPixel';
 
 export class FallingImage {
-  private imageCanvas: HTMLCanvasElement;
+  private readonly imageCanvas: HTMLCanvasElement;
   private imageCtx: CanvasRenderingContext2D;
   queuedPixels: FallingPixel[] = [];
+
+  shuffleQueuedPixels() {
+    const r = Math.floor(Math.random() * 7) + 7;
+    for (let i = 0; i < this.queuedPixels.length; i += r) {
+      for (let j = 0; j < r; j++) {
+        const k = Math.floor(Math.random() * r);
+        if (i + k < this.queuedPixels.length && i + j < this.queuedPixels.length) {
+          [this.queuedPixels[i + j], this.queuedPixels[i + k]] = [this.queuedPixels[i + k], this.queuedPixels[i + j]];
+        }
+      }
+    }
+  }
 
   constructor(
     public x: number,
@@ -66,7 +78,7 @@ export class FallingImage {
     );
 
     setTimeout(async () => {
-      for (let i = 0; i < data.length; i += 4) {
+      for (let i = data.length - 4; i >= 0; i -= 4) {
         const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
         if (a === 0 || (r === 0 && g === 0 && b === 0)) {
           continue;

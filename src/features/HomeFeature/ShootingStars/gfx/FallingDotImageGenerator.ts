@@ -19,6 +19,7 @@ export class FallingDotImageGenerator {
     canvas.width = max;
     canvas.height = max;
     const ctx = canvas.getContext('2d')!;
+    ctx.imageSmoothingEnabled = false;
 
     for (let i = 0; i < size * 2; i++) {
       ctx.fillStyle = color;

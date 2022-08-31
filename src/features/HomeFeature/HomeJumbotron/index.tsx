@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import JumbotronGreeting from './JumbotronGreeting';
 import JumbotronIcons from './JumbotronIcons';
 
-export default function Index() {
+export default function HomeJumbotron() {
   return <Box sx={{ py: 4, bgcolor: '#a13e00' }}>
     <Container maxWidth="md">
       <Box sx={{ mt: 3 }}>

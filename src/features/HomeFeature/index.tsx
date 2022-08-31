@@ -1,7 +1,7 @@
 import Navbar from '../../components/Navbar';
 import * as React from 'react';
 import styled from '@mui/material/styles/styled';
-import Jumbotron from './Jumbotron';
+import HomeJumbotron from './HomeJumbotron';
 import { HomeContext } from './context';
 import Terminal from './Terminal';
 import ShootingStars from './ShootingStars';
@@ -27,7 +27,7 @@ export default function HomeFeature() {
   return <HomeContext.Provider value={{ openTerminal: handleOpen, disableShootingStars }}>
     <Navbar/>
     <Offset/>
-    {shootingStars ? <ShootingStars/> : <Jumbotron/>}
+    {shootingStars ? <ShootingStars/> : <HomeJumbotron/>}
     <HomeContent/>
     <Terminal open={open} handleClose={handleClose} enableShootingStars={enableShootingStars}/>
     <Snackbar open={snackbarMessage.length > 0} autoHideDuration={2000} onClose={() => setSnackbarMessage('')}>

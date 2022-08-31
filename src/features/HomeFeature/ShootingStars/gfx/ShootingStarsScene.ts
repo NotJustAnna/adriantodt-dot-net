@@ -19,12 +19,9 @@ export class ShootingStarsScene {
     this.lastRenderTime = now;
     this.deltaAcc += delta;
     // console.log(this.deltaAcc);
-    if (this.deltaAcc > 5) {
-      this.deltaAcc -= 5;
-      this.renderer.objs.push(ShootingStar.ofColor(ShootingStarsScene.randomColor()));
-    }
     if (this.image) {
       if (this.image.queuedPixels.length > 0) {
+        this.image.shuffleQueuedPixels();
         this.renderer.objs.push(this.image.queuedPixels.shift()!);
       }
     } else if (this.imageUrl) {
@@ -33,6 +30,10 @@ export class ShootingStarsScene {
       });
       this.imageUrl = undefined;
     }
+    if (this.deltaAcc > ((this.image?.queuedPixels?.length ?? 0) ? 4 : 1)) {
+      this.deltaAcc -= Math.floor(this.deltaAcc);
+      this.renderer.objs.push(ShootingStar.ofColor(ShootingStarsScene.randomColor()));
+    }
     this.renderer.draw(ctx, delta);
     if (this.image) {
       this.image.draw(ctx);
@@ -40,7 +41,9 @@ export class ShootingStarsScene {
   }
 
   private static randomColor() {
-    return ShootingStarsScene.hslToRgb(Math.random(), Math.random(), Math.random());
+    return ShootingStarsScene.hslToRgb(
+      Math.random(), 1, Math.random(),
+    );
   }
 
   /**
