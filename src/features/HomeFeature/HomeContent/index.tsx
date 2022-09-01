@@ -1,9 +1,14 @@
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
 import Copyright from '../../../components/Copyright';
 import * as React from 'react';
-import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import tokenlab from '../../../assets/tokenlab.logo.min.jpg';
 import HomeJourney from '../HomeJourney';
 

@@ -1,7 +1,14 @@
 import Typography from '@mui/material/Typography';
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Paper, StepContent, StepLabel } from '@mui/material';
+import Step from '@mui/material/Step';
 import Stepper from '@mui/material/Stepper';
-import ActiveStep from '../../../components/ActiveStep';
+import Paper from '@mui/material/Paper';
+import StepContent from '@mui/material/StepContent';
+import StepLabel from '@mui/material/StepLabel';
+import Avatar from '@mui/material/Avatar';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
 import ifsp from '../../../assets/ifsp.logo.min.jpg';
 import ufscar from '../../../assets/ufscar.logo.min.jpg';
 import tokenlab from '../../../assets/tokenlab.logo.min.jpg';
@@ -15,7 +22,7 @@ export default function HomeJourney() {
         '& .MuiStepIcon-root.Mui-active': { color: '#e85900' },
         '& .MuiStepIcon-text': { fill: '#ffffff' },
       }}>
-        <ActiveStep>
+        <Step active>
           <StepLabel>Self-taught Programmer</StepLabel>
           <StepContent sx={{ pb: 1 }}>
             <Typography>
@@ -25,8 +32,8 @@ export default function HomeJourney() {
               After that, I started learning HTML and PHP, then C#, Java and Kotlin.
             </Typography>
           </StepContent>
-        </ActiveStep>
-        <ActiveStep>
+        </Step>
+        <Step active>
           <StepLabel>Computer System Technician & Computer Science Bachelor Student</StepLabel>
           <StepContent sx={{ pb: 1 }}>
             <List sx={{ pt: 0, pb: 0, pl: 0.5 }}>
@@ -50,8 +57,8 @@ export default function HomeJourney() {
               </ListItem>
             </List>
           </StepContent>
-        </ActiveStep>
-        <ActiveStep>
+        </Step>
+        <Step active>
           <StepLabel>Mid Software Programmer</StepLabel>
           <StepContent sx={{ pb: 1 }}>
             <List sx={{ pt: 0, pb: 0, pl: 0.5 }}>
@@ -66,7 +73,7 @@ export default function HomeJourney() {
               </ListItem>
             </List>
           </StepContent>
-        </ActiveStep>
+        </Step>
       </Stepper>
     </Paper>
   </>;

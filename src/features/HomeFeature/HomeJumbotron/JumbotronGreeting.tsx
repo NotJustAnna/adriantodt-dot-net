@@ -11,17 +11,18 @@ function Over(props: { toggled: boolean }) {
 }
 
 function Things(props: { director: React.MutableRefObject<AnimationDirector> }) {
+  const { director } = props;
   const [index, setIndex] = React.useState(0);
 
   React.useEffect(() => {
     const id = setTimeout(
-      () => props.director.current
+      () => director.current
         .whenAvailable(() => setIndex(index => (index + 1) % things.length))
         .delaying(1500),
       3000,
     );
     return () => clearTimeout(id);
-  }, [index]);
+  }, [index, director]);
 
   return <TextTransition inline springConfig={presets.gentle}>{things[index % things.length]}</TextTransition>;
 }

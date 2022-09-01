@@ -1,4 +1,8 @@
-import { Alert, InputAdornment, Modal, Snackbar, TextField } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import InputAdornment from '@mui/material/InputAdornment';
+import Modal from '@mui/material/Modal';
+import Snackbar from '@mui/material/Snackbar';
+import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import * as React from 'react';
 import { useState } from 'react';
