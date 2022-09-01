@@ -1,10 +1,11 @@
-import { InputAdornment, Modal, TextField } from '@mui/material';
+import { Alert, InputAdornment, Modal, Snackbar, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
+import * as React from 'react';
 import { useState } from 'react';
 
 export interface TerminalProps {
   open: boolean;
-  handleClose: (text?: string) => void;
+  handleClose: () => void;
   enableShootingStars: () => void;
 }
 
@@ -14,6 +15,7 @@ const autoComplete = [
 
 export default function Terminal(props: TerminalProps) {
   const [text, setText] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = React.useState('');
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
@@ -27,7 +29,8 @@ export default function Terminal(props: TerminalProps) {
         props.enableShootingStars();
         props.handleClose();
       } else {
-        props.handleClose(`${text.split(' ')[0]}: command not found`);
+        setSnackbarMessage(`${text.split(' ')[0]}: command not found`);
+        props.handleClose();
       }
       setText('');
     } else if (event.key === 'Tab') {
@@ -46,32 +49,64 @@ export default function Terminal(props: TerminalProps) {
       }
     }
   };
-  return <Modal
-    open={props.open}
-    onClose={() => props.handleClose()}
-    aria-labelledby="modal-modal-title"
-    aria-describedby="modal-modal-description"
-  >
-    <Box maxWidth="sm" sx={{
-      position: 'absolute' as 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: '100%',
-      // bgcolor: 'background.paper',
-      // border: '2px solid #000',
-      boxShadow: 24,
-      // p: 4,
-    }}>
-      <TextField
-        label="guest@adriantodt.net"
-        fullWidth
-        sx={{ bgcolor: 'background.paper' }}
-        InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
-        value={text}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
-    </Box>
-  </Modal>;
+  return <>
+    <Modal
+      open={props.open}
+      onClose={() => props.handleClose()}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box maxWidth="sm" sx={{
+        position: 'absolute' as 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '100%',
+        // bgcolor: 'background.paper',
+        // border: '2px solid #000',
+        boxShadow: 24,
+        // p: 4,
+      }}>
+        <TextField
+          label="guest@adriantodt.net"
+          fullWidth
+          sx={{
+            bgcolor: 'background.paper',
+            '& .MuiFormLabel-root': {
+              fontWeight: 600,
+            },
+            '& .MuiOutlinedInput-input': {
+              fontFamily: 'monospace',
+              fontWeight: 500,
+            },
+            '& .MuiInputAdornment-root .MuiTypography-root': {
+              fontFamily: 'monospace',
+              fontWeight: 600,
+            },
+            '& .MuiFormLabel-root.Mui-focused': {
+              color: '#14f314',
+            },
+            '& .Mui-focused .MuiOutlinedInput-input': {
+              color: '#14f314',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#14f314 !important',
+            },
+            '& .Mui-focused .MuiInputAdornment-root .MuiTypography-root': {
+              color: '#14f314',
+            },
+          }}
+          InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+          value={text}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
+      </Box>
+    </Modal>
+    <Snackbar open={snackbarMessage.length > 0} autoHideDuration={2000} onClose={() => setSnackbarMessage('')}>
+      <Alert onClose={() => setSnackbarMessage('')} severity="error">
+        {snackbarMessage}
+      </Alert>
+    </Snackbar>
+  </>;
 }
