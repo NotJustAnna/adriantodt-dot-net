@@ -11,6 +11,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons/faLinkedinIn';
 import { faCircle } from '@fortawesome/free-solid-svg-icons/faCircle';
+import { faChartSimple } from '@fortawesome/free-solid-svg-icons/faChartSimple';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons/faDiscord';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
@@ -77,32 +78,33 @@ export default function JumbotronIcons() {
     <IconButton aria-label="Twitter" title="Twitter" href="https://twitter.com/adriantodt">
       <FontAwesomeIcon icon={faTwitter} mask={faCircle} transform="shrink-5 down-0.3 right-0.2"/>
     </IconButton>
-    <IconButton aria-label="Discord" onClick={() => setOpen(true)}>
+    <IconButton aria-label="Discord" title="Discord" onClick={() => setOpen(true)}>
       <FontAwesomeIcon icon={faDiscord} mask={faCircle} transform="shrink-5.5"/>
     </IconButton>
     <DiscordPortal open={open} onClose={() => setOpen(false)}/>
-    <IconButton aria-label="E-mail" onClick={copyToClipboard}>
+    <IconButton aria-label="E-mail" title="E-mail" onClick={copyToClipboard}>
       <FontAwesomeIcon icon={faEnvelope} mask={faCircle} transform="shrink-5"/>
     </IconButton>
     <Snackbar open={copied} autoHideDuration={2000} onClose={() => setCopied(false)}>
-      <Alert onClose={() => setCopied(false)} severity="success">
-        Copied to Clipboard!
-      </Alert>
+      <Alert onClose={() => setCopied(false)} severity="success">Copied to Clipboard!</Alert>
     </Snackbar>
-    <IconButton aria-label="GitHub" href="https://github.com/adriantodt">
+    <IconButton aria-label="GitHub" title="GitHub" href="https://github.com/adriantodt">
       <FontAwesomeIcon icon={faGithub}/>
     </IconButton>
-    <IconButton aria-label="Gitlab" href="https://gitlab.com/adriantodt">
+    <IconButton aria-label="Gitlab" title="Gitlab" href="https://gitlab.com/adriantodt">
       <FontAwesomeIcon icon={faGitlab} mask={faCircle} transform="shrink-4 down-0.7"/>
     </IconButton>
-    <IconButton aria-label="Steam" href="https://steamcommunity.com/id/adriantodt/">
+    <IconButton aria-label="Steam" title="Steam" href="https://steamcommunity.com/id/adriantodt/">
       <FontAwesomeIcon icon={faSteam}/>
     </IconButton>
-    <IconButton aria-label="Dockerhub" href="https://hub.docker.com/u/adriantodt">
+    <IconButton aria-label="Dockerhub" title="Dockerhub" href="https://hub.docker.com/u/adriantodt">
       <FontAwesomeIcon icon={faDocker} mask={faCircle} transform="shrink-6"/>
     </IconButton>
+    <IconButton aria-label="CodersRank" title="CodersRank" href="https://profile.codersrank.io/user/adriantodt">
+      <FontAwesomeIcon icon={faChartSimple}  mask={faCircle} transform="shrink-5"/>
+    </IconButton>
     <HomeContext.Consumer>
-      {({ openTerminal }) => <IconButton aria-label="Terminal" onClick={openTerminal}>
+      {({ openTerminal }) => <IconButton aria-label="Terminal" title="Terminal" onClick={openTerminal}>
         <FontAwesomeIcon icon={faTerminal} mask={faCircle} transform="shrink-8.5 down-0.1"/>
       </IconButton>}
     </HomeContext.Consumer>

@@ -21,6 +21,10 @@ export class FallingDotImageGenerator {
     const ctx = canvas.getContext('2d')!;
     ctx.imageSmoothingEnabled = false;
 
+    // ctx.fillStyle = '#ff0000';
+    // ctx.fillRect(0,0,canvas.width,canvas.height);
+    // ctx.clearRect(1,1,canvas.width-2,canvas.height-2);
+
     for (let i = 0; i < size * 2; i++) {
       ctx.fillStyle = color;
       const at = max - speed * i, sz = size - Math.floor(i / 1.5);
