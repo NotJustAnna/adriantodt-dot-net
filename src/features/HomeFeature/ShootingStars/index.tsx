@@ -5,14 +5,20 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { ShootingStarsScene } from './gfx/ShootingStarsScene';
 import { HomeContext } from '../context';
 import adriantodtPixelated from '../../../assets/adriantodt.pixelated.png';
-import { Fab, FabProps } from '@mui/material';
+import pausedImage from '../../../assets/paused.png';
+import { Card, CardContent, Fab, FabProps } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark';
-import { faQuestion } from '@fortawesome/free-solid-svg-icons/faQuestion';
-import { faExpand } from '@fortawesome/free-solid-svg-icons/faExpand';
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons/faRotateRight';
 import { faCompress } from '@fortawesome/free-solid-svg-icons/faCompress';
+import { faExpand } from '@fortawesome/free-solid-svg-icons/faExpand';
+import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark';
+import { faPause } from '@fortawesome/free-solid-svg-icons/faPause';
+import { faPlay } from '@fortawesome/free-solid-svg-icons/faPlay';
+import Typography from '@mui/material/Typography';
 
 const fabBlue: FabProps['sx'] = { bgcolor: '#3680f4', ':hover': { bgcolor: '#2f6ed4' } };
+const fabGreen: FabProps['sx'] = { bgcolor: '#00ad3a', ':hover': { bgcolor: '#009c34' } };
+const fabGrey: FabProps['sx'] = { bgcolor: '#777777', ':hover': { bgcolor: '#666666' } };
 const fabBoxSxFS: BoxProps['sx'] = {
   display: 'flex', gap: 1,
   float: 'right', position: 'relative', right: 6, bottom: 52,
@@ -24,51 +30,108 @@ const fabBoxSxW: BoxProps['sx'] = {
 
 export default function ShootingStars() {
   const { disableShootingStars } = useContext(HomeContext);
-
+  const [paused, setPaused] = React.useState(false);
   const [fullscreen, setFullscreen] = React.useState(false);
   const windowRef = useRef<HTMLDivElement>();
   const sceneRef = useRef<ShootingStarsScene>();
   if (!sceneRef.current) {
-    sceneRef.current = new ShootingStarsScene(adriantodtPixelated);
+    const scene = new ShootingStarsScene(adriantodtPixelated);
+    scene.pausedImageUrl = pausedImage;
+    sceneRef.current = scene;
+  } else {
+    sceneRef.current!.paused = paused;
+  }
+
+  const reset = () => {
+    const scene = new ShootingStarsScene(adriantodtPixelated);
+    scene.pausedImageUrl = pausedImage;
+    sceneRef.current = scene;
   }
 
   const changeFullscreen = () => {
     if (fullscreen) {
-      document.exitFullscreen().then(() => setFullscreen(false), console.error);
+      document.exitFullscreen().catch(console.error);
     } else {
       let window = windowRef.current;
       if (!window) {
         return;
       }
-      window.requestFullscreen().then(() => setFullscreen(true), console.error);
+      window.requestFullscreen().catch(console.error);
     }
   };
 
   useEffect(() => {
-    let listener = (e: KeyboardEvent) => {
+    let keyboardListener = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         disableShootingStars();
+      } else if (e.key === 'Pause') {
+        setPaused(!paused);
       }
     };
-    document.addEventListener('keydown', listener);
+    document.addEventListener('keydown', keyboardListener);
+    let fullscreenListener = () => {
+      if (!document.fullscreenElement) {
+        setFullscreen(false);
+      } else if (document.fullscreenElement === windowRef.current) {
+        setFullscreen(true);
+      }
+    }
+    document.addEventListener('fullscreenchange', fullscreenListener);
     return () => {
-      document.removeEventListener('keydown', listener);
+      document.removeEventListener('keydown', keyboardListener);
+      document.removeEventListener('fullscreenchange', fullscreenListener);
     }
   }, [disableShootingStars]);
 
   return <Box ref={windowRef} sx={{ bgcolor: '#000000' }}>
     <Canvas draw={(ctx) => sceneRef.current!.loop(ctx)}
             className={fullscreen ? styles.canvasFullscreen : styles.canvas}/>
+    {
+      !fullscreen && (
+        <Box sx={{ position: 'relative', left: 16, bottom: 40, float: 'left' }}>
+          <Card sx={{ minWidth: 275 }}>
+            <CardContent>
+              <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                Easter-egg
+              </Typography>
+              <Typography variant="h5" component="div">
+                Shooting Stars
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Canvas-based animation
+              </Typography>
+              <Typography variant="body2">
+                Procedurally generated shooting stars,
+                <br/>
+                inspired by old-school screensavers and
+                <br/>
+                old console games.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
+      )
+    }
     <Box sx={fullscreen ? fabBoxSxFS : fabBoxSxW}>
-      <Fab size="small" color="inherit" aria-label="help" sx={fabBlue}>
-        <FontAwesomeIcon icon={faQuestion} transform="grow-2"/>
-      </Fab>
-      <Fab size="small" color="inherit" aria-label={fullscreen ? 'compress' : 'expand'} sx={fabBlue} onClick={changeFullscreen}>
+      {
+        !fullscreen && (<>
+          <Fab size="small" color="inherit" sx={fabGreen} onClick={() => setPaused(!paused)}>
+            <FontAwesomeIcon icon={paused ? faPlay : faPause}/>
+          </Fab>
+          <Fab size="small" color="inherit" sx={fabGreen} onClick={reset}>
+            <FontAwesomeIcon icon={faRotateRight}/>
+          </Fab>
+        </>)
+      }
+      <Fab size="small" color="inherit" aria-label={fullscreen ? 'compress' : 'expand'}
+           sx={fullscreen ? fabGrey : fabBlue} onClick={changeFullscreen}>
         <FontAwesomeIcon icon={fullscreen ? faCompress : faExpand} transform="grow-2"/>
       </Fab>
-      <Fab size="small" color="error" aria-label="close" onClick={disableShootingStars}>
-        <FontAwesomeIcon icon={faXmark} transform="grow-6"/>
-      </Fab>
+      {!fullscreen && (
+        <Fab size="small" color="error" aria-label="close" onClick={disableShootingStars}>
+          <FontAwesomeIcon icon={faXmark} transform="grow-6"/>
+        </Fab>
+      )}
     </Box>
   </Box>;
 }

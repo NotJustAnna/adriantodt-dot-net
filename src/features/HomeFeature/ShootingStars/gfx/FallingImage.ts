@@ -67,8 +67,11 @@ export class FallingImage {
     ctx.drawImage(img, 0, 0);
     const data = ctx.getImageData(0, 0, w, h).data;
 
-    const scale = Math.ceil(Math.min(screenHeight / h, screenWidth / w));
-    console.log(`scale: ${scale}, w: ${w}, h: ${h}`);
+    const scale = Math.round(Math.max(
+      2,
+      Math.min(screenHeight / (h * 2), screenWidth / (w * 2)),
+    ));
+
     const image = new FallingImage(
       screenWidth / 2 - (w * scale) / 2,
       screenHeight / 2 - (h * scale) / 2,

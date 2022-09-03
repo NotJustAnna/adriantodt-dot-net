@@ -1,6 +1,7 @@
 import { ShootingStarsRenderer } from './ShootingStarsRenderer';
 import { ShootingStar } from './ShootingStar';
 import { FallingImage } from './FallingImage';
+import { StaticImage } from './StaticImage';
 
 export class ShootingStarsScene {
   private readonly renderer = new ShootingStarsRenderer();
@@ -8,6 +9,9 @@ export class ShootingStarsScene {
   private deltaAcc: number = 0;
   private image?: FallingImage;
   imageUrl?: string;
+  private pausedImage?: StaticImage;
+  pausedImageUrl?: string;
+  paused: boolean = false;
 
   constructor(imageUrl?: string) {
     this.imageUrl = imageUrl;
@@ -18,7 +22,19 @@ export class ShootingStarsScene {
     const delta = this.lastRenderTime === 0 ? 1 : (now - this.lastRenderTime) / 20;
     this.lastRenderTime = now;
     this.deltaAcc += delta;
-    // console.log(this.deltaAcc);
+
+    if (this.paused) {
+      if (this.pausedImage) {
+        this.pausedImage.draw(ctx);
+      } else if (this.pausedImageUrl) {
+        StaticImage.fromImageUrl(this.pausedImageUrl, 2).then((image) => {
+          this.pausedImage = image;
+        });
+        this.pausedImageUrl = undefined;
+      }
+      return;
+    }
+
     if (this.image) {
       if (this.image.queuedPixels.length > 0) {
         this.image.shuffleQueuedPixels();

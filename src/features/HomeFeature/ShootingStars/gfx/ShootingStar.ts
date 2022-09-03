@@ -40,7 +40,7 @@ export class ShootingStar extends FallingDot {
       return false;
     }
 
-    ctx.drawImage(this.bitmap!, x, y);
+    ctx.drawImage(this.bitmap!, Math.round(x), Math.round(y));
     this.lifetime += delta;
     return true;
   }

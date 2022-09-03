@@ -16,6 +16,10 @@ export default function Canvas(props: CanvasProps) {
     let animationFrameId: number;
 
     const render = () => {
+      if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+      }
       draw(context);
       animationFrameId = window.requestAnimationFrame(render);
     }

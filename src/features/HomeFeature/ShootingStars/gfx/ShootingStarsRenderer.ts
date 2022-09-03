@@ -12,8 +12,6 @@ export class ShootingStarsRenderer {
 
     draw(ctx: CanvasRenderingContext2D, delta: number) {
         ctx.imageSmoothingEnabled = false;
-        ctx.canvas.width = ctx.canvas.clientWidth;
-        ctx.canvas.height = ctx.canvas.clientHeight;
         //this.bufferCanvas.width = ctx.canvas.width;
         //this.bufferCanvas.height = ctx.canvas.height;
 
