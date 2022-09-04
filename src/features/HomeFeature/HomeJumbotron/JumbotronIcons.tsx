@@ -91,7 +91,7 @@ export default function JumbotronIcons() {
     <IconButton aria-label="GitHub" title="GitHub" href="https://github.com/adriantodt">
       <FontAwesomeIcon icon={faGithub}/>
     </IconButton>
-    <IconButton aria-label="Gitlab" title="Gitlab" href="https://gitlab.com/adriantodt">
+    <IconButton aria-label="GitLab" title="GitLab" href="https://gitlab.com/adriantodt">
       <FontAwesomeIcon icon={faGitlab} mask={faCircle} transform="shrink-4 down-0.7"/>
     </IconButton>
     <IconButton aria-label="Steam" title="Steam" href="https://steamcommunity.com/id/adriantodt/">
