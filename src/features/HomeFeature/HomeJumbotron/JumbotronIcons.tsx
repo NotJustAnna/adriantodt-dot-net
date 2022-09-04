@@ -23,6 +23,7 @@ import { faTerminal } from '@fortawesome/free-solid-svg-icons/faTerminal';
 import React from 'react';
 import { HomeContext } from '../context';
 import { TransitionProps } from '@mui/material/transitions';
+import { Tooltip } from '@mui/material';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children: React.ReactElement<any, any>; },
@@ -35,7 +36,7 @@ const Transition = React.forwardRef(function Transition(
 export function DiscordPortal(props: { open: boolean; onClose: () => void; }) {
   const { open, onClose } = props;
   const thing = 'gZWEuYQG99/gg.pprocsipp'
-    .replaceAll('pp','d')
+    .replaceAll('pp', 'd')
     .split('')
     .reverse()
     .join('');
@@ -60,6 +61,7 @@ export function DiscordPortal(props: { open: boolean; onClose: () => void; }) {
 }
 
 export default function JumbotronIcons() {
+  const isTerminalKnown = localStorage.getItem('__terminal_known') === 'true';
   const [open, setOpen] = React.useState(false);
 
   const [copied, setCopied] = React.useState(false);
@@ -72,41 +74,62 @@ export default function JumbotronIcons() {
   }
 
   return <>
-    <IconButton aria-label="LinkedIn" title="LinkedIn" href="https://linkedin.com/in/adriantodt">
-      <FontAwesomeIcon icon={faLinkedinIn} mask={faCircle} transform="shrink-5 down-0.4"/>
-    </IconButton>
-    <IconButton aria-label="Twitter" title="Twitter" href="https://twitter.com/adriantodt">
-      <FontAwesomeIcon icon={faTwitter} mask={faCircle} transform="shrink-5 down-0.3 right-0.2"/>
-    </IconButton>
-    <IconButton aria-label="Discord" title="Discord" onClick={() => setOpen(true)}>
-      <FontAwesomeIcon icon={faDiscord} mask={faCircle} transform="shrink-5.5"/>
-    </IconButton>
+    <Tooltip title="LinkedIn">
+      <IconButton aria-label="LinkedIn" href="https://linkedin.com/in/adriantodt">
+        <FontAwesomeIcon icon={faLinkedinIn} mask={faCircle} transform="shrink-5 down-0.4"/>
+      </IconButton>
+    </Tooltip>
+    <Tooltip title="Twitter">
+      <IconButton aria-label="Twitter" href="https://twitter.com/adriantodt">
+        <FontAwesomeIcon icon={faTwitter} mask={faCircle} transform="shrink-5 down-0.3 right-0.2"/>
+      </IconButton>
+    </Tooltip>
+    <Tooltip title="Discord">
+      <IconButton aria-label="Discord" onClick={() => setOpen(true)}>
+        <FontAwesomeIcon icon={faDiscord} mask={faCircle} transform="shrink-5.5"/>
+      </IconButton>
+    </Tooltip>
     <DiscordPortal open={open} onClose={() => setOpen(false)}/>
-    <IconButton aria-label="E-mail" title="E-mail" onClick={copyToClipboard}>
-      <FontAwesomeIcon icon={faEnvelope} mask={faCircle} transform="shrink-5"/>
-    </IconButton>
+    <Tooltip title="E-mail">
+      <IconButton aria-label="E-mail" onClick={copyToClipboard}>
+        <FontAwesomeIcon icon={faEnvelope} mask={faCircle} transform="shrink-5"/>
+      </IconButton>
+    </Tooltip>
     <Snackbar open={copied} autoHideDuration={2000} onClose={() => setCopied(false)}>
       <Alert onClose={() => setCopied(false)} severity="success">Copied to Clipboard!</Alert>
     </Snackbar>
-    <IconButton aria-label="GitHub" title="GitHub" href="https://github.com/adriantodt">
-      <FontAwesomeIcon icon={faGithub}/>
-    </IconButton>
-    <IconButton aria-label="GitLab" title="GitLab" href="https://gitlab.com/adriantodt">
-      <FontAwesomeIcon icon={faGitlab} mask={faCircle} transform="shrink-4 down-0.7"/>
-    </IconButton>
-    <IconButton aria-label="Steam" title="Steam" href="https://steamcommunity.com/id/adriantodt/">
-      <FontAwesomeIcon icon={faSteam}/>
-    </IconButton>
-    <IconButton aria-label="Dockerhub" title="Dockerhub" href="https://hub.docker.com/u/adriantodt">
-      <FontAwesomeIcon icon={faDocker} mask={faCircle} transform="shrink-6"/>
-    </IconButton>
-    <IconButton aria-label="CodersRank" title="CodersRank" href="https://profile.codersrank.io/user/adriantodt">
-      <FontAwesomeIcon icon={faChartSimple}  mask={faCircle} transform="shrink-5"/>
-    </IconButton>
+    <Tooltip title="GitHub">
+      <IconButton aria-label="GitHub" href="https://github.com/adriantodt">
+        <FontAwesomeIcon icon={faGithub}/>
+      </IconButton>
+    </Tooltip>
+    <Tooltip title="GitLab">
+      <IconButton aria-label="GitLab" href="https://gitlab.com/adriantodt">
+        <FontAwesomeIcon icon={faGitlab} mask={faCircle} transform="shrink-4 down-0.7"/>
+      </IconButton>
+    </Tooltip>
+    <Tooltip title="Steam">
+      <IconButton aria-label="Steam" href="https://steamcommunity.com/id/adriantodt/">
+        <FontAwesomeIcon icon={faSteam}/>
+      </IconButton>
+    </Tooltip>
+    <Tooltip title="Docker Hub">
+      <IconButton aria-label="Docker Hub" href="https://hub.docker.com/u/adriantodt">
+        <FontAwesomeIcon icon={faDocker} mask={faCircle} transform="shrink-6"/>
+      </IconButton>
+    </Tooltip>
+    <Tooltip title="CodersRank">
+      <IconButton aria-label="CodersRank" href="https://profile.codersrank.io/user/adriantodt">
+        <FontAwesomeIcon icon={faChartSimple} mask={faCircle} transform="shrink-5"/>
+      </IconButton>
+    </Tooltip>
     <HomeContext.Consumer>
-      {({ openTerminal }) => <IconButton aria-label="Terminal" title="Terminal" onClick={openTerminal}>
-        <FontAwesomeIcon icon={faTerminal} mask={faCircle} transform="shrink-8.5 down-0.1"/>
-      </IconButton>}
+      {({ openTerminal }) =>
+        <Tooltip title={isTerminalKnown ? 'Terminal' : '???'}>
+          <IconButton aria-label="Terminal" onClick={openTerminal}>
+            <FontAwesomeIcon icon={faTerminal} mask={faCircle} transform="shrink-8.5 down-0.1"/>
+          </IconButton>
+        </Tooltip>}
     </HomeContext.Consumer>
   </>;
 }

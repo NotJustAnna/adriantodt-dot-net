@@ -21,6 +21,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons/faDiscord';
+import { Tooltip } from '@mui/material';
 
 const projectListSx: ListProps['sx'] = {
   p: 0, pb: 1,
@@ -51,7 +52,6 @@ const subProjectListSx: ListProps['sx'] = {
   },
 };
 
-
 const Logo = styled('img')({ margin: 3 });
 
 function PaperListItem(props: ListItemProps<'div'>) {
@@ -76,9 +76,11 @@ function LinProject() {
     <ListItemText
       primary={
         <ListItemTitle text="Lin">
-          <IconButton size="small" aria-label="github" href="https://github.com/adriantodt/Lin">
-            <FontAwesomeIcon icon={faGithub}/>
-          </IconButton>
+          <Tooltip title="Source Code">
+            <IconButton size="small" aria-label="Source Code" href="https://github.com/adriantodt/Lin">
+              <FontAwesomeIcon icon={faGithub}/>
+            </IconButton>
+          </Tooltip>
         </ListItemTitle>
       }
       secondary={
@@ -114,9 +116,11 @@ function TartarSubProject() {
     <ListItemText
       primary={
         <ListItemTitle text="Tartar">
-          <IconButton size="small" aria-label="github" href="https://github.com/adriantodt/tartar">
-            <FontAwesomeIcon icon={faGithub}/>
-          </IconButton>
+          <Tooltip title="Source Code">
+            <IconButton size="small" aria-label="Source Code" href="https://github.com/adriantodt/tartar">
+              <FontAwesomeIcon icon={faGithub}/>
+            </IconButton>
+          </Tooltip>
         </ListItemTitle>
       }
       secondary={<>
@@ -143,9 +147,11 @@ function LeanVMSubProject() {
     <ListItemText
       primary={
         <ListItemTitle text="LeanVM">
-          <IconButton size="small" aria-label="github" href="https://github.com/adriantodt/leanvm">
-            <FontAwesomeIcon icon={faGithub}/>
-          </IconButton>
+          <Tooltip title="Source Code">
+            <IconButton size="small" aria-label="Source Code" href="https://github.com/adriantodt/leanvm">
+              <FontAwesomeIcon icon={faGithub}/>
+            </IconButton>
+          </Tooltip>
         </ListItemTitle>
       }
       secondary={<>
@@ -169,9 +175,11 @@ function LunarrProject() {
     <ListItemText
       primary={
         <ListItemTitle text="Lunarr">
-          <IconButton size="small" aria-label="github" href="https://github.com/adriantodt/lunar">
-            <FontAwesomeIcon icon={faGithub}/>
-          </IconButton>
+          <Tooltip title="Source Code">
+            <IconButton size="small" aria-label="Source Code" href="https://github.com/adriantodt/lunar">
+              <FontAwesomeIcon icon={faGithub}/>
+            </IconButton>
+          </Tooltip>
         </ListItemTitle>
       }
       secondary={<>
@@ -193,14 +201,16 @@ function LunarrProject() {
 function NanoflakesProject() {
   return <PaperListItem>
     <ListItemAvatar>
-      <Avatar  src={nanoflakes} alt="Nanoflakes"/>
+      <Avatar src={nanoflakes} alt="Nanoflakes"/>
     </ListItemAvatar>
     <ListItemText
       primary={
         <ListItemTitle text="Nanoflakes">
-          <IconButton size="small" aria-label="github" href="https://github.com/nanoflakes">
-            <FontAwesomeIcon icon={faGithub}/>
-          </IconButton>
+          <Tooltip title="Source Code">
+            <IconButton size="small" aria-label="Source Code" href="https://github.com/nanoflakes">
+              <FontAwesomeIcon icon={faGithub}/>
+            </IconButton>
+          </Tooltip>
         </ListItemTitle>
       }
       secondary={<>
@@ -230,15 +240,18 @@ function DiceBotProject() {
     <ListItemText
       primary={
         <ListItemTitle text="DiceBot">
-          <IconButton size="small" aria-label="github" href="https://github.com/adriantodt/dicebot">
-            <FontAwesomeIcon icon={faGithub}/>
-          </IconButton>
+          <Tooltip title="Source Code">
+            <IconButton size="small" aria-label="Source Code" href="https://github.com/adriantodt/dicebot">
+              <FontAwesomeIcon icon={faGithub}/>
+            </IconButton>
+          </Tooltip>
         </ListItemTitle>
       }
       secondary={
         <>
           <Typography variant="body2" gutterBottom>
-            DiceBot is a simple Discord bot which allows users to roll dice, using the <Link href="https://rollem.rocks/docs/v1-syntax">same syntax</Link>
+            DiceBot is a simple Discord bot which allows users to roll dice, using the <Link
+            href="https://rollem.rocks/docs/v1-syntax">same syntax</Link>
             {' '}as the <Link href="https://rollem.rocks">Rollem</Link> discord bot.
           </Typography>
           <Typography variant="body2" gutterBottom>
@@ -263,9 +276,12 @@ function DragonDiceSubProject() {
     <ListItemText
       primary={
         <ListItemTitle text="Dragon Dice" alignItems="center">
-          <IconButton aria-label="github" href="https://discord.com/oauth2/authorize?client_id=746016492130402414&scope=bot&permissions=0">
-            <FontAwesomeIcon icon={faDiscord} mask={faCircle} transform="shrink-5.5"/>
-          </IconButton>
+          <Tooltip title="Invite to Server">
+            <IconButton aria-label="Invite bot to Discord server"
+                        href="https://discord.com/oauth2/authorize?client_id=746016492130402414&scope=bot&permissions=0">
+              <FontAwesomeIcon icon={faDiscord} mask={faCircle} transform="shrink-5.5"/>
+            </IconButton>
+          </Tooltip>
         </ListItemTitle>
       }
     />
@@ -280,9 +296,12 @@ function AruSubProject() {
     <ListItemText
       primary={
         <ListItemTitle text="Aru!" alignItems="center">
-          <IconButton aria-label="github" href="https://discord.com/oauth2/authorize?client_id=1010710730955313195&scope=bot&permissions=0">
-            <FontAwesomeIcon icon={faDiscord} mask={faCircle} transform="shrink-5.5"/>
-          </IconButton>
+          <Tooltip title="Invite to Server">
+            <IconButton aria-label="Invite bot to Discord server"
+                        href="https://discord.com/oauth2/authorize?client_id=1010710730955313195&scope=bot&permissions=0">
+              <FontAwesomeIcon icon={faDiscord} mask={faCircle} transform="shrink-5.5"/>
+            </IconButton>
+          </Tooltip>
         </ListItemTitle>
       }
     />
