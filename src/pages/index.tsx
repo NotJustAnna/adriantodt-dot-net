@@ -1,5 +1,5 @@
 import * as React from 'react';
-import HomeFeature from '../src/features/HomeFeature';
+import HomeFeature from '../features/HomeFeature';
 import Head from 'next/head';
 
 export default function IndexView() {
