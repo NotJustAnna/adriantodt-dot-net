@@ -15,7 +15,7 @@ export default function Footer() {
           <Typography variant="h4" component="p">
             AdrianTodt
           </Typography>
-          <Typography variant="subtitle2" component="p" sx={{ color: grey[400] }}>
+          <Typography variant="subtitle2" component="p" sx={{ color: grey[400] }} gutterBottom>
             © {year}
           </Typography>
         </Grid>
@@ -25,6 +25,12 @@ export default function Footer() {
             This website was made with <Link href="https://reactjs.org/">React</Link>,
             {' '}<Link href="https://nextjs.org/">Next.js</Link>
             {' and '}<Link href="https://mui.com/">MUI</Link>.
+          </Typography>
+          <Typography variant="body2" component="p" gutterBottom>
+            Deployed with and hosted at <Link href="https://pages.cloudflare.com/">Cloudflare Pages</Link>.
+          </Typography>
+          <Typography variant="body2" component="p">
+            Also, you can see the website&apos;s source code <Link href="https://github.com/adriantodt/adriantodt-dot-net/">here</Link>.
           </Typography>
         </Grid>
       </Grid>
