@@ -61,7 +61,7 @@ export function DiscordPortal(props: { open: boolean; onClose: () => void; }) {
 }
 
 export default function JumbotronIcons() {
-  const isTerminalKnown = localStorage.getItem('__terminal_known') === 'true';
+  const isTerminalKnown = typeof window !== 'undefined' ?  window.localStorage.getItem('__terminal_known') === 'true' : false;
   const [open, setOpen] = React.useState(false);
 
   const [copied, setCopied] = React.useState(false);

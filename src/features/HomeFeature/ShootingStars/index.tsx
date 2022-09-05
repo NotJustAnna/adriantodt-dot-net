@@ -1,11 +1,11 @@
 import Box, { BoxProps } from '@mui/material/Box';
-import styles from './index.module.scss';
+import styles from './index.module.css';
 import Canvas from './Canvas';
 import React, { useContext, useEffect, useRef } from 'react';
 import { ShootingStarsScene } from './gfx/ShootingStarsScene';
 import { HomeContext } from '../context';
-import adriantodtPixelated from '../../../assets/adriantodt.pixelated.png';
-import pausedImage from '../../../assets/paused.png';
+import adriantodtPixelated from '../../../../public/assets/adriantodt.pixelated.png';
+import pausedImage from '../../../../public/assets/paused.png';
 import { Card, CardContent, Fab, FabProps } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons/faRotateRight';
@@ -34,17 +34,23 @@ export default function ShootingStars() {
   const [fullscreen, setFullscreen] = React.useState(false);
   const windowRef = useRef<HTMLDivElement>();
   const sceneRef = useRef<ShootingStarsScene>();
+  const mqRef = useRef<MediaQueryList>();
+  if (!mqRef.current && typeof window !== 'undefined') {
+    mqRef.current = window.matchMedia('(min-width: 1771px)');
+  }
+  const [floatingCard, setFloatingCard] = React.useState(() => !!mqRef.current?.matches);
+
   if (!sceneRef.current) {
-    const scene = new ShootingStarsScene(adriantodtPixelated);
-    scene.pausedImageUrl = pausedImage;
+    const scene = new ShootingStarsScene(adriantodtPixelated.src);
+    scene.pausedImageUrl = pausedImage.src;
     sceneRef.current = scene;
   } else {
     sceneRef.current!.paused = paused;
   }
 
   const reset = () => {
-    const scene = new ShootingStarsScene(adriantodtPixelated);
-    scene.pausedImageUrl = pausedImage;
+    const scene = new ShootingStarsScene(adriantodtPixelated.src);
+    scene.pausedImageUrl = pausedImage.src;
     sceneRef.current = scene;
   }
 
@@ -68,6 +74,10 @@ export default function ShootingStars() {
         setPaused(!paused);
       }
     };
+    let mediaQueryListener = (e: MediaQueryListEvent) => {
+      setFloatingCard(e.matches);
+    };
+    mqRef.current!.addEventListener('change', mediaQueryListener);
     document.addEventListener('keydown', keyboardListener);
     let fullscreenListener = () => {
       if (!document.fullscreenElement) {
@@ -80,6 +90,7 @@ export default function ShootingStars() {
     return () => {
       document.removeEventListener('keydown', keyboardListener);
       document.removeEventListener('fullscreenchange', fullscreenListener);
+      mqRef.current!.removeEventListener('change', mediaQueryListener);
     }
   }, [disableShootingStars]);
 
@@ -88,7 +99,7 @@ export default function ShootingStars() {
             className={fullscreen ? styles.canvasFullscreen : styles.canvas}/>
     {
       !fullscreen && (
-        <Box sx={{ position: 'relative', left: 16, bottom: 40, float: 'left' }}>
+        <Box sx={floatingCard ? { position: 'relative', left: 16, bottom: 40, float: 'left' } : {}}>
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -102,9 +113,9 @@ export default function ShootingStars() {
               </Typography>
               <Typography variant="body2">
                 Procedurally generated shooting stars,
-                <br/>
+                {floatingCard ? <br/> : <wbr/>}
                 inspired by old-school screensavers and
-                <br/>
+                {floatingCard ? <br/> : <wbr/>}
                 old console games.
               </Typography>
             </CardContent>

@@ -9,9 +9,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
-import ifsp from '../../../assets/ifsp.logo.min.jpg';
-import ufscar from '../../../assets/ufscar.logo.min.jpg';
-import tokenlab from '../../../assets/tokenlab.logo.min.jpg';
+import ifsp from '../../../../public/assets/ifsp.logo.min.jpg';
+import ufscar from '../../../../public/assets/ufscar.logo.min.jpg';
+import tokenlab from '../../../../public/assets/tokenlab.logo.min.jpg';
 import * as React from 'react';
 
 export default function HomeJourney() {
@@ -39,7 +39,7 @@ export default function HomeJourney() {
             <List sx={{ pt: 0, pb: 0, pl: 0.5 }}>
               <ListItem alignItems="flex-start" sx={{ p: 0 }}>
                 <ListItemAvatar>
-                  <Avatar alt="Federal Institute of São Paulo" src={ifsp}/>
+                  <Avatar alt="Federal Institute of São Paulo" src={ifsp.src}/>
                 </ListItemAvatar>
                 <ListItemText
                   primary="Federal Institute of São Paulo"
@@ -48,7 +48,7 @@ export default function HomeJourney() {
               </ListItem>
               <ListItem alignItems="flex-start" sx={{ p: 0 }}>
                 <ListItemAvatar>
-                  <Avatar alt="Federal University of São Carlos" src={ufscar}/>
+                  <Avatar alt="Federal University of São Carlos" src={ufscar.src}/>
                 </ListItemAvatar>
                 <ListItemText
                   primary="Federal University of São Carlos"
@@ -64,7 +64,7 @@ export default function HomeJourney() {
             <List sx={{ pt: 0, pb: 0, pl: 0.5 }}>
               <ListItem alignItems="flex-start" sx={{ p: 0 }}>
                 <ListItemAvatar>
-                  <Avatar alt="Tokenlab" src={tokenlab}/>
+                  <Avatar alt="Tokenlab" src={tokenlab.src}/>
                 </ListItemAvatar>
                 <ListItemText
                   primary="Tokenlab"

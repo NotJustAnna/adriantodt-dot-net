@@ -6,11 +6,6 @@ import ListItem, { ListItemProps } from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { blueGrey, grey } from '@mui/material/colors';
-import lin from '../../../assets/lin.min.svg';
-import leanvm from '../../../assets/leanvm.min.svg';
-import nanoflakes from '../../../assets/nanoflakes.min.png';
-import dragondice from '../../../assets/dragondice.min.jpg';
-import aru from '../../../assets/aru.min.jpg';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -70,7 +65,7 @@ function LinProject() {
   return <PaperListItem alignItems="flex-start">
     <ListItemAvatar>
       <Avatar sx={{ bgcolor: '#151515' }}>
-        <Logo src={lin} alt="Lin"/>
+        <Logo src="/assets/lin.min.svg" alt="Lin"/>
       </Avatar>
     </ListItemAvatar>
     <ListItemText
@@ -83,6 +78,7 @@ function LinProject() {
           </Tooltip>
         </ListItemTitle>
       }
+      secondaryTypographyProps={{ component: 'div' }}
       secondary={
         <>
           <Typography variant="body2" gutterBottom>
@@ -123,6 +119,7 @@ function TartarSubProject() {
           </Tooltip>
         </ListItemTitle>
       }
+      secondaryTypographyProps={{ component: 'div' }}
       secondary={<>
         <Typography variant="body2" gutterBottom>
           Tartar is a Kotlin Multiplatform library for trie-based lexical analysis and pratt-parsing, with its API being
@@ -141,7 +138,7 @@ function LeanVMSubProject() {
   return <ListItem component="div" alignItems="flex-start">
     <ListItemAvatar>
       <Avatar sx={{ bgcolor: '#151515' }}>
-        <Logo src={leanvm} alt="LeanVM"/>
+        <Logo src="/assets/leanvm.min.svg" alt="LeanVM"/>
       </Avatar>
     </ListItemAvatar>
     <ListItemText
@@ -154,6 +151,7 @@ function LeanVMSubProject() {
           </Tooltip>
         </ListItemTitle>
       }
+      secondaryTypographyProps={{ component: 'div' }}
       secondary={<>
         <Typography variant="body2">
           LeanVM is a lean and fast bytecode and virtual machine, originally designed for Lin, but separated into its
@@ -182,6 +180,7 @@ function LunarrProject() {
           </Tooltip>
         </ListItemTitle>
       }
+      secondaryTypographyProps={{ component: 'div' }}
       secondary={<>
         <Typography variant="body2" gutterBottom>
           Lunarr is a in-development system which oversees and synchronizes many media automation, media players and
@@ -201,7 +200,7 @@ function LunarrProject() {
 function NanoflakesProject() {
   return <PaperListItem>
     <ListItemAvatar>
-      <Avatar src={nanoflakes} alt="Nanoflakes"/>
+      <Avatar src="/assets/nanoflakes.min.png" alt="Nanoflakes"/>
     </ListItemAvatar>
     <ListItemText
       primary={
@@ -213,6 +212,7 @@ function NanoflakesProject() {
           </Tooltip>
         </ListItemTitle>
       }
+      secondaryTypographyProps={{ component: 'div' }}
       secondary={<>
         <Typography variant="body2" gutterBottom>
           Nanoflakes is a standard for unique IDs, which are designed to be as small as possible, while still being
@@ -247,6 +247,7 @@ function DiceBotProject() {
           </Tooltip>
         </ListItemTitle>
       }
+      secondaryTypographyProps={{ component: 'div' }}
       secondary={
         <>
           <Typography variant="body2" gutterBottom>
@@ -271,7 +272,7 @@ function DiceBotProject() {
 function DragonDiceSubProject() {
   return <ListItem component="div" alignItems="flex-start">
     <ListItemAvatar>
-      <Avatar src={dragondice} alt="Dragon Dice"/>
+      <Avatar src="/assets/dragondice.min.jpg" alt="Dragon Dice"/>
     </ListItemAvatar>
     <ListItemText
       primary={
@@ -291,7 +292,7 @@ function DragonDiceSubProject() {
 function AruSubProject() {
   return <ListItem component="div">
     <ListItemAvatar>
-      <Avatar src={aru} alt="Aru!"/>
+      <Avatar src="/assets/aru.min.jpg" alt="Aru!"/>
     </ListItemAvatar>
     <ListItemText
       primary={

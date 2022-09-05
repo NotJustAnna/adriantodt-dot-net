@@ -16,7 +16,9 @@ export default function HomeFeature() {
   const enableShootingStars = () => setShootingStars(true);
   const disableShootingStars = () => setShootingStars(false);
   const handleOpen = () => {
-    localStorage.setItem('__terminal_known', 'true');
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('__terminal_known', 'true');
+    }
     setOpen(true)
   };
   const handleClose = () => setOpen(false);
