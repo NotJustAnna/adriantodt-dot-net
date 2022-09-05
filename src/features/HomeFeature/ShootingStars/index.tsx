@@ -115,9 +115,9 @@ export default function ShootingStars() {
               </Typography>
               <Typography variant="body2">
                 Procedurally generated shooting stars,
-                {floatingCard ? <br/> : <wbr/>}
+                {floatingCard ? <br/> : ' '}
                 inspired by old-school screensavers and
-                {floatingCard ? <br/> : <wbr/>}
+                {floatingCard ? <br/> : ' '}
                 old console games.
               </Typography>
             </CardContent>
