@@ -52,7 +52,7 @@ export function DiscordPortal(props: { open: boolean; onClose: () => void; }) {
       <DialogTitle>Contact me on Discord</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
-          Join my "Gateway" Discord server and send me a message on DMs.
+          Join my &ldquo;Gateway&rdquo; Discord server and send me a message on DMs.
         </DialogContentText>
       </DialogContent>
       <DialogActions>{open && <Button href={`https://${thing}`}>Join</Button>}</DialogActions>

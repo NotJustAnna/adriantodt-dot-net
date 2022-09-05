@@ -40,12 +40,14 @@ export default function ShootingStars() {
   }
   const [floatingCard, setFloatingCard] = React.useState(() => !!mqRef.current?.matches);
 
-  if (!sceneRef.current) {
-    const scene = new ShootingStarsScene(adriantodtPixelated.src);
-    scene.pausedImageUrl = pausedImage.src;
-    sceneRef.current = scene;
-  } else {
-    sceneRef.current!.paused = paused;
+  if (typeof window !== 'undefined') {
+    if (!sceneRef.current) {
+      const scene = new ShootingStarsScene(adriantodtPixelated.src);
+      scene.pausedImageUrl = pausedImage.src;
+      sceneRef.current = scene;
+    } else {
+      sceneRef.current!.paused = paused;
+    }
   }
 
   const reset = () => {
@@ -71,7 +73,7 @@ export default function ShootingStars() {
       if (e.key === 'Escape') {
         disableShootingStars();
       } else if (e.key === 'Pause') {
-        setPaused(!paused);
+        setPaused(p => !p);
       }
     };
     let mediaQueryListener = (e: MediaQueryListEvent) => {
@@ -126,7 +128,7 @@ export default function ShootingStars() {
     <Box sx={fullscreen ? fabBoxSxFS : fabBoxSxW}>
       {
         !fullscreen && (<>
-          <Fab size="small" color="inherit" sx={fabGreen} onClick={() => setPaused(!paused)}>
+          <Fab size="small" color="inherit" sx={fabGreen} onClick={() => setPaused(p => !p)}>
             <FontAwesomeIcon icon={paused ? faPlay : faPause}/>
           </Fab>
           <Fab size="small" color="inherit" sx={fabGreen} onClick={reset}>

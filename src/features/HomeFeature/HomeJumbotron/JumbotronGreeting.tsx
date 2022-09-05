@@ -30,9 +30,7 @@ function Things(props: { director: React.MutableRefObject<AnimationDirector> }) 
 export default function JumbotronGreeting() {
   const animationDirector = React.useRef<AnimationDirector>() as React.MutableRefObject<AnimationDirector>;
   const [csr, setCsr] = React.useState(false);
-  useEffect(() => {
-    setCsr(true);
-  });
+  useEffect(() => setCsr(true), []);
   if (!animationDirector.current) {
     animationDirector.current = new AnimationDirector();
   }
@@ -48,6 +46,6 @@ export default function JumbotronGreeting() {
     <Typography variant="h4" component="div" fontWeight={300} lineHeight={1.5} onClick={toggle}>
       I {csr && <Over toggled={toggled}/>}engineer solutions for{csr && ' '}{csr ? <Things director={animationDirector}/> : '..'}.
     </Typography>
-    <Typography>I'm a back-end focused full-stack software engineer based in Brazil.</Typography>
+    <Typography>I&apos;m a back-end focused full-stack software engineer based in Brazil.</Typography>
   </div>;
 }

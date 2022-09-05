@@ -28,12 +28,6 @@
     "build": "next build",
     "start:prod": "next start"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -47,6 +41,8 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^18.7.14"
+    "@types/node": "^18.7.14",
+    "eslint": "^8.23.0",
+    "eslint-config-next": "12.2.5"
   }
 }

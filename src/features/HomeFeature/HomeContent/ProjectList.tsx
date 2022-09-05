@@ -56,8 +56,8 @@ function PaperListItem(props: ListItemProps<'div'>) {
 export function ListItemTitle(props: { alignItems?: string, text: string, children: React.ReactNode }) {
   const { text, children, alignItems } = props;
   return <Box sx={{ display: 'flex', alignItems: alignItems ?? 'flex-end', pb: 0.5 }}>
-    <Box sx={{ flexGrow: 1 }} children={text}/>
-    <Box sx={{ mr: 0.5 }} children={children}/>
+    <Box sx={{ flexGrow: 1 }}>{text}</Box>
+    <Box sx={{ mr: 0.5 }}>{children}</Box>
   </Box>;
 }
 
@@ -216,7 +216,7 @@ function NanoflakesProject() {
       secondary={<>
         <Typography variant="body2" gutterBottom>
           Nanoflakes is a standard for unique IDs, which are designed to be as small as possible, while still being
-          unique. The standard is designed to fit in a 64-bit integer, and is backwards-compatible with Twitter's
+          unique. The standard is designed to fit in a 64-bit integer, and is backwards-compatible with Twitter&apos;s
           Snowflakes.
         </Typography>
         <Typography variant="body2">
