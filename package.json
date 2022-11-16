@@ -21,7 +21,7 @@
     "react-text-transition": "^3.0.2",
     "sass": "^1.55.0",
     "typescript": "^4.8.4",
-    "web-vitals": "^3.0.3"
+    "web-vitals": "^3.1.0"
   },
   "scripts": {
     "start": "next dev",
